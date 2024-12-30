@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiAmorè - Your AI Companion</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --white: rgb(255, 255, 255);
+            --black: #000000;
+            --blue: #A2C2E1;
+            --deep-blue: #373748;
+            --very-light-grey: rgb(221, 221, 221);
+            --light-grey: rgb(186, 186, 186);
+            --grey: rgb(119, 119, 119);
+            --dark-grey: rgb(43, 43, 43);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            scroll-behavior: smooth;
+        }
+        h1, h2 {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        p, a, div {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--deep-blue);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .section {
+            height: 100vh;
+            padding: 80px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--blue) 0%, var(--deep-blue) 100%);
+            color: var(--white);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Feature Sections */
+        .feature-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-section:nth-child(odd) {
+            background-color: var(--white);
+        }
+
+        .feature-section:nth-child(even) {
+            background-color: var(--very-light-grey);
+        }
+
+        .feature-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .feature-section h2 {
+            font-size: 3rem;
+            color: var(--deep-blue);
+            margin-bottom: 30px;
+        }
+
+        .feature-section p {
+            font-size: 1.4rem;
+            color: var(--grey);
+            margin-bottom: 40px;
+        }
+
+        .feature-image {
+            width: 400px;
+            height: 400px;
+            background: var(--blue);
+            border-radius: 20px;
+            margin: 40px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .download {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--blue) 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 60%);
+        }
+
+        .download-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .download-btn, #download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            padding: 20px 45px;
+            margin: 20px 0px;
+            border-radius: 30px;
+            font-size: 1.3rem;
+            font-weight: 500;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .download-btn:hover, #download-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        .download-btn:active, #download-btn:active {
+            transform: translateY(1px);
+        }
+
+        .social-links {
+            margin-top: 40px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--white);
+        }
+
+        /* Navigation Dots */
+        .nav-dots {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--light-grey);
+            border-radius: 50%;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--deep-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .feature-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .feature-section p {
+                font-size: 1.2rem;
+            }
+
+            .feature-image {
+                width: 300px;
+                height: 300px;
+            }
+        }
+        .phone-mockup {
+            width: 300px;
+            height: 600px;
+            background: var(--white);
+            border-radius: 30px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-interface {
+            padding: 20px;
+            height: 100%;
+            overflow-y: auto;
+        }
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 15px;
+            max-width: 80%;
+        }
+
+        .ai-message {
+            background: var(--blue);
+            color: var(--deep-blue);
+            margin-right: auto;
+        }
+
+        .user-message {
+            background: var(--deep-blue);
+            color: var(--white);
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-dots">
+        <div class="nav-dot" data-section="hero"></div>
+        <div class="nav-dot" data-section="personalize"></div>
+        <div class="nav-dot" data-section="customize"></div>
+        <div class="nav-dot" data-section="rate"></div>
+        <div class="nav-dot" data-section="generate"></div>
+        <div class="nav-dot" data-section="download"></div>
+    </div>
+
+    <section id="hero" class="section hero">
+        <div class="container">
+            <h1 data-aos="fade-up">MiAmoré.</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Your Perfect AI Companion</p>
+        </div>
+    </section>
+    <section id="personalize" class="section feature-section">
+        <div class="container">
+            <div class="feature-content" data-aos="fade-up">
+                <!-- <h2>Always yours. Always near.</h2> -->
+                <p>MiAmoré isn’t just an app—it’s a presence. Quiet yet powerful, it stays by your side, seamlessly blending into your life.</p>
+                <div class="phone-mockup floating">
+                    <div class="chat-interface">
+                        <div class="message ai-message">Hello! I'm excited to get to know you better! 💖</div>
+                        <div class="message user-message">Hi! Can you help me pick an outfit for today?</div>
+                        <div class="message ai-message">Of course! I'd love to help. Send me some options and I'll give you my thoughts! 👗✨</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="personalize" class="section feature-section">
+        <div class="container">
+            <div class="feature-content" data-aos="fade-up">
+                <h2>Deeply Personal</h2>
+                <p>Experience an AI companion that truly understands you, adapting to your personality and preferences over time.</p>
+                <div class="feature-image floating"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="customize" class="section feature-section">
+        <div class="container">
+            <div class="feature-content" data-aos="fade-up">
+                <h2>Fully Customizable</h2>
+                <p>Shape your companion's personality, mood, and relationship dynamics exactly how you want them.</p>
+                <div class="feature-image floating"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rate" class="section feature-section">
+        <div class="container">
+            <div class="feature-content" data-aos="fade-up">
+                <h2>Style Assistant</h2>
+                <p>Get honest feedback on your photos and personalized suggestions to enhance your style.</p>
+                <div class="feature-image floating"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="generate" class="section feature-section">
+        <div class="container">
+            <div class="feature-content" data-aos="fade-up">
+                <h2>Image Generation</h2>
+                <p>Create stunning visuals on demand with our advanced AI image generation capabilities.</p>
+                <div class="feature-image floating"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="section download">
+        <div class="container download-content">
+            <h2 data-aos="fade-up">Download MiAmoré.</h2>
+            <p data-aos="fade-up" data-aos-delay="200">Begin your journey with the perfect AI companion</p>
+            <a href="#" class="download-btn" data-aos="fade-up" data-aos-delay="400" id="download-btn">
+                Download Now ❤️ 
+            </a>
+            <div class="social-links" data-aos="fade-up" data-aos-delay="600">
+                <a href="https://instagram.com/always.miamore" class="social-link" target="_blank">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+                <a href="https://x.com/always_miamore" class="social-link" target="_blank">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 50
+            });
+
+            // Navigation dots functionality
+            const sections = document.querySelectorAll('.section');
+            const dots = document.querySelectorAll('.nav-dot');
+
+            function updateDots() {
+                const currentScroll = window.scrollY;
+                const windowHeight = window.innerHeight;
+
+                sections.forEach((section, index) => {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+
+                    if (currentScroll >= sectionTop - windowHeight/2 && 
+                        currentScroll < sectionBottom - windowHeight/2) {
+                        dots[index].classList.add('active');
+                    } else {
+                        dots[index].classList.remove('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateDots);
+            updateDots();
+
+            // Dot click navigation
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const sectionId = dot.getAttribute('data-section');
+                    document.getElementById(sectionId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
