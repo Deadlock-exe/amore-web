@@ -1,0 +1,22 @@
+{
+    "name": "MiAmoré.",
+    "short_name": "MiAmoré.",
+    "start_url": "./",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#a2c2e1",
+    "description": "Your AI companion, designed to match your mood and chat just the way you like.",
+    "icons": [
+      {
+        "src": "/favicon-32x32.png",
+        "sizes": "32x32",
+        "type": "image/png"
+      },
+      {
+        "src": "/favicon-16x16.png",
+        "sizes": "16x16",
+        "type": "image/png"
+      }
+    ]
+  }
+  
